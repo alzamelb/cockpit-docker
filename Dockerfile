@@ -1,6 +1,6 @@
 FROM php:7.4-apache
 
-ARG COCKPIT_VERSION="master"
+ARG COCKPIT_VERSION="core"
 
 RUN apt-get update \
     && apt-get install -y \
@@ -21,7 +21,7 @@ RUN apt-get update \
 RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
 RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
-RUN wget https://github.com/agentejo/cockpit/archive/${COCKPIT_VERSION}.zip -O /tmp/cockpit.zip; unzip /tmp/cockpit.zip -d /tmp/; rm /tmp/cockpit.zip
+RUN wget https://files.getcockpit.com/releases/master/cockpit-core.zip -O /tmp/cockpit.zip; unzip /tmp/cockpit.zip -d /tmp/; rm /tmp/cockpit.zip
 RUN mv /tmp/cockpit-${COCKPIT_VERSION}/.htaccess /var/www/html/.htaccess
 RUN mv /tmp/cockpit-${COCKPIT_VERSION}/* /var/www/html/
 RUN rm -R /tmp/cockpit-${COCKPIT_VERSION}/
